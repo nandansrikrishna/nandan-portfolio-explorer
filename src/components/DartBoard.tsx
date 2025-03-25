@@ -1,4 +1,3 @@
-
 import { useState, useRef } from "react";
 import FadeIn from "./animations/FadeIn";
 import { cn } from "@/lib/utils";
@@ -10,6 +9,7 @@ interface Dart {
   y: number;
   score: number;
   color: string;
+  sectionName: string; // Added to track which section was hit
 }
 
 // Define section scores (simplified)
@@ -24,7 +24,7 @@ const boardSections = [
 const DartBoard = () => {
   const [darts, setDarts] = useState<Dart[]>([]);
   const [animating, setAnimating] = useState(false);
-  const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [selectedDart, setSelectedDart] = useState<number | null>(null);
   const boardRef = useRef<HTMLDivElement>(null);
 
   // Calculate which section was hit
@@ -58,27 +58,28 @@ const DartBoard = () => {
     const sectionHit = getSectionHit(normalizedDistance);
     
     // Create new dart
+    const newDartId = Date.now();
     const newDart: Dart = {
-      id: Date.now(),
+      id: newDartId,
       x: x / (rect.width / 2),
       y: y / (rect.height / 2),
       score: sectionHit.value,
-      color: sectionHit.color.replace('bg-', 'border-')
+      color: sectionHit.color.replace('bg-', 'border-'),
+      sectionName: sectionHit.name
     };
-    
-    // Show active section
-    setActiveSection(sectionHit.name);
     
     // Add dart after animation completes
     setTimeout(() => {
       setDarts(prev => [...prev, newDart]);
+      setSelectedDart(newDartId); // Highlight this new dart
       setAnimating(false);
-      
-      // Reset active section after a delay
-      setTimeout(() => {
-        setActiveSection(null);
-      }, 1500);
     }, 300);
+  };
+
+  // Handle dart selection to show section info
+  const handleDartClick = (dartId: number, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent triggering a new dart throw
+    setSelectedDart(dartId === selectedDart ? null : dartId);
   };
 
   return (
@@ -105,19 +106,51 @@ const DartBoard = () => {
           <div className="absolute left-0 right-0 top-1/2 h-[1px] bg-gray-800/30"></div>
           <div className="absolute inset-0 rounded-full border-4 border-gray-800"></div>
           
+          {/* Section highlight effect for selected dart */}
+          {selectedDart && (
+            <div className="absolute inset-0 flex items-center justify-center z-5 pointer-events-none">
+              {darts.find(d => d.id === selectedDart) && (
+                <div className="absolute">
+                  {/* Dynamic highlight based on the section */}
+                  {boardSections.map((section, index) => {
+                    const matchingDart = darts.find(d => d.id === selectedDart);
+                    const isHitSection = matchingDart?.sectionName === section.name;
+                    
+                    return isHitSection ? (
+                      <div 
+                        key={index}
+                        className={cn(
+                          "absolute rounded-full opacity-30",
+                          section.color,
+                          "animate-pulse"
+                        )}
+                        style={{
+                          inset: `${(1 - section.radius) * 100}%`,
+                          zIndex: 3
+                        }}
+                      />
+                    ) : null;
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+          
           {/* Darts */}
           {darts.map(dart => (
             <div 
               key={dart.id}
+              onClick={(e) => handleDartClick(dart.id, e)}
               className={cn(
                 "absolute w-2 h-2 rounded-full bg-gray-100 shadow-md",
-                `border-2 ${dart.color}`
+                "transition-all duration-200 ease-in-out z-10",
+                `border-2 ${dart.color}`,
+                selectedDart === dart.id ? "w-3 h-3 ring-2 ring-white ring-opacity-70" : ""
               )}
               style={{
                 left: `calc(50% + ${dart.x * 50}%)`,
                 top: `calc(50% + ${dart.y * 50}%)`,
-                transform: 'translate(-50%, -50%)',
-                zIndex: 10
+                transform: 'translate(-50%, -50%)'
               }}
             >
               <div className="absolute right-full h-px w-8 bg-gray-600 transform rotate-45"></div>
@@ -129,20 +162,34 @@ const DartBoard = () => {
             <div className="absolute w-3 h-3 bg-gray-800 rounded-full left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 animate-scale-in"></div>
           )}
           
-          {/* Section highlight effect */}
-          {activeSection && (
+          {/* Section info overlay */}
+          {selectedDart && (
             <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-              <div className="text-white text-xl font-bold bg-black/50 px-4 py-2 rounded-lg animate-fade-in">
-                {activeSection}: {boardSections.find(s => s.name === activeSection)?.value} points!
-              </div>
+              {darts.find(d => d.id === selectedDart) && (
+                <div className="text-white text-xl font-bold bg-black/50 px-4 py-2 rounded-lg">
+                  {darts.find(d => d.id === selectedDart)?.sectionName}: {darts.find(d => d.id === selectedDart)?.score} points!
+                </div>
+              )}
             </div>
           )}
         </div>
       </FadeIn>
       
-      <div className="mt-4 text-center text-foreground/70 animate-pulse">
-        Click on the dartboard to throw a dart!
+      <div className="mt-4 text-center text-foreground/70">
+        <p>Click on the dartboard to throw a dart!</p>
+        {darts.length > 0 && (
+          <p className="mt-2">Click on a dart to see its score details.</p>
+        )}
       </div>
+      
+      {/* Score summary */}
+      {darts.length > 0 && (
+        <div className="mt-6 p-4 bg-slate-100 rounded-lg shadow-sm">
+          <h3 className="text-lg font-semibold mb-2">Score Summary</h3>
+          <p>Darts thrown: {darts.length}</p>
+          <p>Total score: {darts.reduce((sum, dart) => sum + dart.score, 0)}</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -22,9 +22,10 @@ const MonaLisa = () => {
       const mouseX = (e.clientX - centerX) / (rect.width / 2);
       const mouseY = (e.clientY - centerY) / (rect.height / 2);
       
-      // Limit rotation to a subtle range
-      const rotationX = Math.min(Math.max(mouseY * 5, -5), 5);
-      const rotationY = Math.min(Math.max(mouseX * -5, -5), 5);
+      // Increase sensitivity (from 5 to 10) and flip the sign to correct orientation
+      // Now positive mouseX creates positive rotationY (looks toward cursor)
+      const rotationX = Math.min(Math.max(-mouseY * 10, -10), 10);
+      const rotationY = Math.min(Math.max(mouseX * 10, -10), 10);
       
       setRotation({ x: rotationX, y: rotationY });
     };

@@ -64,26 +64,6 @@ const Hero = () => {
           <MonaLisa />
         </div>
       </div>
-      
-      {!isMobile && (
-        <div className="absolute bottom-0 right-0 pointer-events-none opacity-30 animate-image-glow">
-          <svg
-            width="800"
-            height="800"
-            viewBox="0 0 800 800"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-[500px] h-[500px]"
-          >
-            <circle cx="400" cy="400" r="350" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="400" cy="400" r="250" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="400" cy="400" r="150" stroke="currentColor" strokeWidth="1.5" />
-            <circle cx="400" cy="400" r="50" stroke="currentColor" strokeWidth="1.5" />
-            <line x1="0" y1="400" x2="800" y2="400" stroke="currentColor" strokeWidth="1.5" />
-            <line x1="400" y1="0" x2="400" y2="800" stroke="currentColor" strokeWidth="1.5" />
-          </svg>
-        </div>
-      )}
     </section>
   );
 };

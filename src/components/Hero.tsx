@@ -2,6 +2,7 @@
 import FadeIn from "./animations/FadeIn";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
+import DartBoard from "./DartBoard";
 
 const Hero = () => {
   const isMobile = useIsMobile();
@@ -60,16 +61,7 @@ const Hero = () => {
         </div>
         
         <div className="order-1 md:order-2 mb-8 md:mb-0">
-          <FadeIn delay={200} duration={800}>
-            <div className="relative overflow-hidden rounded-xl aspect-square max-w-md mx-auto">
-              <img 
-                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
-                alt="Nandan - Software Engineer"
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-60"></div>
-            </div>
-          </FadeIn>
+          <DartBoard />
         </div>
       </div>
       

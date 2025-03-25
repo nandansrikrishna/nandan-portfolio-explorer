@@ -13,9 +13,9 @@ const Hero = () => {
     >
       <div 
         id="content"
-        className="max-w-7xl mx-auto w-full"
+        className="max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
       >
-        <div className="max-w-3xl">
+        <div className="order-2 md:order-1 max-w-3xl">
           <FadeIn delay={100} duration={800}>
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
               Hey, I'm <span className="text-gradient">Nandan</span>.
@@ -55,6 +55,19 @@ const Hero = () => {
               >
                 Contact Me
               </a>
+            </div>
+          </FadeIn>
+        </div>
+        
+        <div className="order-1 md:order-2 mb-8 md:mb-0">
+          <FadeIn delay={200} duration={800}>
+            <div className="relative overflow-hidden rounded-xl aspect-square max-w-md mx-auto">
+              <img 
+                src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80"
+                alt="Nandan - Software Engineer"
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent opacity-60"></div>
             </div>
           </FadeIn>
         </div>

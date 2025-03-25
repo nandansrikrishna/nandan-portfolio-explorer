@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ProjectsCarousel from "@/components/ProjectsCarousel";
+import InfiniteProjectsSection from "@/components/InfiniteProjectsSection";
 import AwardsGrid from "@/components/AwardsGrid"; 
 import Footer from "@/components/Footer";
 
@@ -44,7 +44,7 @@ const Index = () => {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <ProjectsCarousel />
+        <InfiniteProjectsSection />
         <AwardsGrid />
       </main>
       <Footer />

@@ -2,7 +2,7 @@
 import FadeIn from "./animations/FadeIn";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
-import DartBoard from "./DartBoard";
+import MonaLisa from "./MonaLisa";
 
 const Hero = () => {
   const isMobile = useIsMobile();
@@ -61,7 +61,7 @@ const Hero = () => {
         </div>
         
         <div className="order-1 md:order-2 mb-8 md:mb-0">
-          <DartBoard />
+          <MonaLisa />
         </div>
       </div>
       

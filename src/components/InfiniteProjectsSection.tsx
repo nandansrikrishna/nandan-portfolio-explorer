@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from "react";
 import { ExternalLink, Github } from "lucide-react";
 import FadeIn from "./animations/FadeIn";
@@ -41,55 +42,7 @@ const allProjects = [
 ];
 
 const InfiniteProjectsSection = () => {
-  const [visibleProjects, setVisibleProjects] = useState<typeof allProjects>([]);
-  const [loading, setLoading] = useState(false);
-  const observerTarget = useRef<HTMLDivElement>(null);
-  const initialLoad = useRef(true);
-
-  // Load initial projects
-  useEffect(() => {
-    if (initialLoad.current) {
-      loadMoreProjects();
-      initialLoad.current = false;
-    }
-  }, []);
-
-  // Set up intersection observer for infinite scroll
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !loading && visibleProjects.length < allProjects.length) {
-          loadMoreProjects();
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (observerTarget.current) {
-      observer.observe(observerTarget.current);
-    }
-
-    return () => {
-      if (observerTarget.current) {
-        observer.unobserve(observerTarget.current);
-      }
-    };
-  }, [visibleProjects, loading]);
-
-  const loadMoreProjects = () => {
-    setLoading(true);
-    // Simulate network delay
-    setTimeout(() => {
-      const nextIndex = visibleProjects.length;
-      const moreProjects = allProjects.slice(
-        nextIndex,
-        Math.min(nextIndex + 3, allProjects.length)
-      );
-
-      setVisibleProjects((prev) => [...prev, ...moreProjects]);
-      setLoading(false);
-    }, 800);
-  };
+  const [visibleProjects, setVisibleProjects] = useState<typeof allProjects>(allProjects);
 
   return (
     <section id="projects" className="py-20 px-6 bg-secondary/30">
@@ -160,24 +113,6 @@ const InfiniteProjectsSection = () => {
               </div>
             </FadeIn>
           ))}
-        </div>
-
-        {/* Loading indicator and observer target */}
-        <div
-          ref={observerTarget}
-          className="flex justify-center items-center pt-12 pb-4"
-        >
-          {loading ? (
-            <div className="flex flex-col items-center">
-              <div className="h-8 w-8 border-4 border-primary/30 border-t-primary rounded-full animate-spin mb-2"></div>
-              <p className="text-sm text-foreground/60">Loading more projects...</p>
-            </div>
-          ) : visibleProjects.length < allProjects.length ? (
-            <p className="text-sm text-foreground/60">Scroll to load more projects</p>
-          ) : (
-            // <p className="text-sm text-foreground/60">You've reached the end of the projects</p>
-            <p className="text-sm text-foreground/60"></p>
-          )}
         </div>
       </div>
     </section>

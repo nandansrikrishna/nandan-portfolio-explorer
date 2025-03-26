@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import InfiniteProjectsSection from "@/components/InfiniteProjectsSection";
 import AwardsGrid from "@/components/AwardsGrid"; 
 import Footer from "@/components/Footer";
+import ExperienceSection from "@/components/ExperienceSection";
 
 const Index = () => {
   // Smooth scroll implementation for internal links
@@ -44,6 +45,7 @@ const Index = () => {
       <Navbar />
       <main className="flex-1">
         <Hero />
+        <ExperienceSection />
         <InfiniteProjectsSection />
         <AwardsGrid />
       </main>

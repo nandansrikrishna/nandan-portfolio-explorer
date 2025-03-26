@@ -25,7 +25,7 @@ const Hero = () => {
           
           <FadeIn delay={300} duration={800}>
             <p className="text-lg md:text-xl text-foreground/80 mb-8 leading-relaxed">
-              Software Engineer with experience in full-stack development and distributed systems.
+              Software Engineer with experience in AI, full-stack development, and distributed systems.
             </p>
           </FadeIn>
           

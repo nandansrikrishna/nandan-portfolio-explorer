@@ -66,9 +66,9 @@ const MonaLisa = () => {
             }}
           />
         </div>
-        <div className="mt-3 text-center text-sm text-foreground/70">
+        {/* <div className="mt-3 text-center text-sm text-foreground/70">
           <p>Move your mouse around to see the photo follow you</p>
-        </div>
+        </div> */}
       </FadeIn>
     </div>
   );

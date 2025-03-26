@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, ExternalLink, Github } from "lucide-react";
 import FadeIn from "./animations/FadeIn";
@@ -8,45 +7,31 @@ import { cn } from "@/lib/utils";
 const projects = [
   {
     id: 1,
-    title: "Distributed ML System",
-    description: "Built a distributed machine learning system for large-scale data processing using TensorFlow and Kubernetes.",
-    tags: ["Python", "TensorFlow", "Kubernetes", "Docker"],
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
+    title: "Poll Tape Scanner for Election Night Reporting",
+    description: "This project explores a novel approach to election-night reporting (ENR) using poll tape scanning technology. By leveraging mobile devices to capture and process poll tape data and AI powered OCR technology, we aim to bridge the gap between speed and security in preliminary election result reporting.",
+    tags: ["OCR", "AI", "Python", "React Native"],
+    image: "/project_images/PollScanner.png",
   },
   {
     id: 2,
-    title: "E-Commerce Platform",
-    description: "Developed a full-stack e-commerce platform with React, Node.js, and PostgreSQL with advanced search capabilities.",
-    tags: ["React", "Node.js", "PostgreSQL", "AWS"],
-    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80",
+    title: "IdentityAI",
+    description: "Based on just an individual's face, we can build a comprehensive profile leveraging smaller pieces of evidence from various sources on the web. We can then cross reference this information with any ID card to validate identification with a high degree of accuracy.",
+    tags: ["Agentic AI", "Python", "React"],
+    image: "/project_images/IdentityAIDashboard.jpg",
   },
   {
     id: 3,
-    title: "Real-time Chat Application",
-    description: "Created a real-time chat application with WebSockets, React, and Express supporting multiple chat rooms and file sharing.",
-    tags: ["WebSockets", "React", "Express", "MongoDB"],
-    image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=600&q=80",
+    title: "If We Had Trains (In Progress)",
+    description: "An interactive educational platform demonstrating how high-speed rail could transform U.S. transportation infrastructure. The tool calculates optimal train routes nationwide while integrating Google Maps API to analyze connectivity between stations and user locations.",
+    tags: ["React", "Routing", "APIs"],
+    image: "/project_images/trains_dash.png",
   },
   {
     id: 4,
-    title: "IoT Home Automation",
-    description: "Designed an IoT home automation system using Raspberry Pi, MQTT, and React Native for mobile control of smart devices.",
-    tags: ["IoT", "Raspberry Pi", "MQTT", "React Native"],
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 5,
-    title: "Blockchain Voting System",
-    description: "Implemented a secure voting system on Ethereum blockchain with smart contracts and web3.js for transparent elections.",
-    tags: ["Solidity", "Ethereum", "Web3.js", "React"],
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80",
-  },
-  {
-    id: 6,
-    title: "AI Content Generator",
-    description: "Built an AI-powered content generator using GPT-3 with a React frontend for creating marketing copy and blog posts.",
-    tags: ["OpenAI", "GPT-3", "React", "Node.js"],
-    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?auto=format&fit=crop&w=600&q=80",
+    title: "Job Finder Bot",
+    description: "A tailored job tracking solution that automatically scrapes targeted websites for relevant job listings based on user preferences. The bot monitors employment opportunities in real-time, filtering results according to customized criteria, and delivers curated job openings directly to users via email notifications.",
+    tags: ["Web Scraping", "Python", "Google Cloud"],
+    image: "/project_images/job_listings.png",
   },
 ];
 
@@ -131,7 +116,7 @@ const ProjectsCarousel = () => {
             ref={carouselRef}
             className="relative"
           >
-            <div 
+            <div
               className="transition-transform duration-500 ease-in-out"
               style={{ transform: `translateX(-${activeIndex * 100}%)` }}
             >

@@ -13,17 +13,17 @@ const awards = [
   {
     title: "Best Hack by Fidelity",
     year: "2024",
-    description: "Awarded for developing a cutting-edge financial technology solution at a national hackathon."
+    description: "Awarded for developing a cutting-edge financial technology solution at Sparthack."
   },
   {
     title: "Stellantis Student Awards recipient",
     year: "2022",
-    description: "Recognized for contributions to automotive software development and innovation."
+    description: "Recognized for innovative ideas in automotive software and industry wide analysis."
   },
   {
     title: "National Merit Scholar Finalist",
     year: "2021",
-    description: "Selected as a National Merit Scholar Finalist for academic excellence and test performance."
+    description: "Selected as a National Merit Scholar Finalist for academic excellence and test performance. Top 1% of high school seniors in the nation."
   },
   {
     title: "Regents Merit Award",

@@ -1,8 +1,103 @@
 
 import { Github, Linkedin, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
 
 const Footer = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    
+    // Set canvas dimensions
+    const resizeCanvas = () => {
+      const container = canvas.parentElement;
+      if (container) {
+        canvas.width = container.clientWidth;
+        canvas.height = container.clientHeight;
+      }
+    };
+    
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    
+    let animationId: number;
+    let particles: { x: number; y: number; radius: number; color: string; speedX: number; speedY: number; }[] = [];
+    
+    // Create particles
+    const createParticles = () => {
+      particles = [];
+      const particleCount = Math.floor(canvas.width / 15);
+      
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 2 + 1,
+          color: `hsl(${Math.random() * 60 + 200}, 70%, 60%)`,
+          speedX: Math.random() * 0.5 - 0.25,
+          speedY: Math.random() * 0.5 - 0.25
+        });
+      }
+    };
+    
+    createParticles();
+    
+    // Animation loop
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Draw wave background
+      const time = Date.now() * 0.001;
+      const waveHeight = canvas.height * 0.2;
+      const waveCount = 3;
+      
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.beginPath();
+      ctx.moveTo(0, canvas.height);
+      
+      for (let x = 0; x < canvas.width; x++) {
+        const y = Math.sin(x * 0.01 + time) * waveHeight + 
+                  Math.sin(x * 0.02 + time * 0.8) * waveHeight * 0.5 + 
+                  canvas.height * 0.6;
+        ctx.lineTo(x, y);
+      }
+      
+      ctx.lineTo(canvas.width, canvas.height);
+      ctx.closePath();
+      ctx.fill();
+      
+      // Draw particles
+      particles.forEach(particle => {
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = particle.color;
+        ctx.fill();
+        
+        // Update position
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+        
+        // Bounce off edges
+        if (particle.x < 0 || particle.x > canvas.width) particle.speedX *= -1;
+        if (particle.y < 0 || particle.y > canvas.height) particle.speedY *= -1;
+      });
+      
+      animationId = requestAnimationFrame(animate);
+    };
+    
+    animate();
+    
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+  
   return (
     <footer id="contact" className="bg-secondary/30 py-16 px-6">
       <div className="max-w-7xl mx-auto">
@@ -41,14 +136,12 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <div className="relative">
-            <div className="aspect-square max-w-[300px] mx-auto md:ml-auto rounded-2xl overflow-hidden shadow-xl border border-white/10">
-              <img
-                src="public/lovable-uploads/4969bd16-61e5-467f-acfa-ac836cf09ddd.png"
-                alt="Nandan on a beach with a kayak"
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              />
-            </div>
+          <div className="relative rounded-2xl overflow-hidden shadow-xl border border-white/10 aspect-square max-w-[300px] mx-auto md:ml-auto">
+            <canvas 
+              ref={canvasRef} 
+              className="w-full h-full"
+              aria-label="Interactive wave animation"
+            />
           </div>
         </div>
         

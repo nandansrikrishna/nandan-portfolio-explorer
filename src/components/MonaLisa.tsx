@@ -22,7 +22,7 @@ const MonaLisa = () => {
       const mouseX = (e.clientX - centerX) / (rect.width / 2);
       const mouseY = (e.clientY - centerY) / (rect.height / 2);
       
-      // Increase sensitivity (from 5 to 10) and flip the sign to correct orientation
+      // Increase sensitivity (10) and flip the sign to correct orientation
       // Now positive mouseX creates positive rotationY (looks toward cursor)
       const rotationX = Math.min(Math.max(-mouseY * 10, -10), 10);
       const rotationY = Math.min(Math.max(mouseX * 10, -10), 10);
@@ -57,8 +57,8 @@ const MonaLisa = () => {
           }}
         >
           <img 
-            src="/lovable-uploads/b7c8314a-46c1-4870-ae30-c4245a605e26.png"
-            alt="Mona Lisa"
+            src="/lovable-uploads/4969bd16-61e5-467f-acfa-ac836cf09ddd.png"
+            alt="Profile Photo"
             className="w-full h-auto object-cover"
             style={{
               transformStyle: 'preserve-3d',
@@ -67,7 +67,7 @@ const MonaLisa = () => {
           />
         </div>
         <div className="mt-3 text-center text-sm text-foreground/70">
-          <p>Move your mouse around to see Mona Lisa follow you</p>
+          <p>Move your mouse around to see the photo follow you</p>
         </div>
       </FadeIn>
     </div>

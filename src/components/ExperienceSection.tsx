@@ -1,8 +1,7 @@
 
 import FadeIn from "./animations/FadeIn";
 import ExperienceItem from "./ExperienceItem";
-import { Database, Code, Laptop, GraduationCap, Building } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { Database, Code, Laptop } from "lucide-react";
 
 const ExperienceSection = () => {
   const experiences = [
@@ -68,38 +67,6 @@ const ExperienceSection = () => {
                 points={exp.points}
               />
             ))}
-          </FadeIn>
-        </div>
-
-        <div className="mt-20 max-w-4xl mx-auto">
-          <FadeIn delay={300} duration={800}>
-            <h2 className="section-heading text-center mb-12">Education</h2>
-            <div className="flex flex-col sm:flex-row items-center gap-8 p-6 rounded-xl bg-white/50 dark:bg-black/20 border border-primary/10 shadow-sm">
-              <div className="flex-shrink-0 w-32 h-32 flex items-center justify-center">
-                <img 
-                  src="/lovable-uploads/c8d86183-b51e-4a43-b4da-78d144a55273.png" 
-                  alt="University of Michigan Logo" 
-                  className="w-full h-auto"
-                />
-              </div>
-              <div className="flex-1 text-center sm:text-left">
-                <h3 className="font-bold text-xl flex flex-col sm:flex-row sm:items-center gap-1 justify-center sm:justify-start">
-                  University of Michigan 
-                  <span className="text-foreground/70 text-base">| Ann Arbor</span>
-                </h3>
-                <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-1 mt-1 mb-3">
-                  <span className="font-medium">Computer Science</span>
-                  <span className="flex items-center text-sm text-foreground/70">
-                    <GraduationCap size={16} className="mr-1 flex-shrink-0" /> 2020 - 2024
-                  </span>
-                </div>
-                <p className="text-foreground/80 leading-relaxed">
-                  Graduated with a Bachelor's degree in Computer Science, specializing in software engineering 
-                  and data systems. Active member of the Michigan Hackers club and participated in multiple 
-                  hackathons representing the university.
-                </p>
-              </div>
-            </div>
           </FadeIn>
         </div>
       </div>

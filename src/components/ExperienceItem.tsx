@@ -17,7 +17,7 @@ type ExperienceItemProps = {
 
 const ExperienceItem = ({ title, company, period, points }: ExperienceItemProps) => {
   return (
-    <div className="mb-8 last:mb-0 p-6 rounded-xl bg-white/50 dark:bg-black/20 border border-primary/10 shadow-sm">
+    <div className="mb-8 last:mb-0">
       <div className="flex flex-col sm:flex-row justify-between mb-2 gap-1">
         <h3 className="font-bold text-xl flex items-center">
           {title} <span className="text-foreground/70">| {company}</span>

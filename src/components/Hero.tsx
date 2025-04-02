@@ -3,9 +3,11 @@ import FadeIn from "./animations/FadeIn";
 import { cn } from "@/lib/utils";
 import { useIsMobile } from "@/hooks/use-mobile";
 import MonaLisa from "./MonaLisa";
+import { useTheme } from "./ThemeProvider";
 
 const Hero = () => {
   const isMobile = useIsMobile();
+  const { theme } = useTheme();
   
   return (
     <section 

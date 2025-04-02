@@ -2,11 +2,13 @@
 import { useState, useEffect, useRef } from "react";
 import FadeIn from "./animations/FadeIn";
 import { cn } from "@/lib/utils";
+import { useTheme } from "./ThemeProvider";
 
 const MonaLisa = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [rotation, setRotation] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -37,6 +39,10 @@ const MonaLisa = () => {
     };
   }, []);
 
+  const profileImage = theme === "dark" 
+    ? "/lovable-uploads/9a266388-0371-414f-8d73-63c51ff81eb1.png" 
+    : "/lovable-uploads/4969bd16-61e5-467f-acfa-ac836cf09ddd.png";
+
   return (
     <div 
       ref={containerRef}
@@ -57,7 +63,7 @@ const MonaLisa = () => {
           }}
         >
           <img 
-            src="/lovable-uploads/4969bd16-61e5-467f-acfa-ac836cf09ddd.png"
+            src={profileImage}
             alt="Profile Photo"
             className="w-full h-auto object-cover"
             style={{

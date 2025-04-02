@@ -1,11 +1,14 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
+import { useTheme } from "./ThemeProvider";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -55,17 +58,37 @@ const Navbar = () => {
           >
             GitHub
           </a>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="rounded-full"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </Button>
         </nav>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden p-2 text-primary rounded-md"
-          onClick={toggleMobileMenu}
-          aria-expanded={isMobileMenuOpen}
-          aria-label="Toggle navigation menu"
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center gap-2">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            className="rounded-full"
+          >
+            {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+          </Button>
+          
+          <button
+            className="p-2 text-primary rounded-md"
+            onClick={toggleMobileMenu}
+            aria-expanded={isMobileMenuOpen}
+            aria-label="Toggle navigation menu"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}

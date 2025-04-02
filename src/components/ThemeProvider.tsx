@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "light" | "dark";
@@ -11,22 +10,25 @@ type ThemeContextType = {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
     // Get theme from localStorage or use light mode as default
     const savedTheme = localStorage.getItem("theme");
-    if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
-    
-    if (typeof window !== "undefined") {
-      // Default to light mode, use system preference as fallback
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    if (savedTheme === "dark" || savedTheme === "light") {
+      setTheme(savedTheme);
+    } else {
+      if (typeof window !== "undefined") {
+        // Default to light mode, use system preference as fallback
+        setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      }
     }
-    return "light"; // Default to light mode
-  });
+  }, []);
 
   useEffect(() => {
     // Update localStorage when theme changes
     localStorage.setItem("theme", theme);
-    
+
     // Add or remove dark class on the document element
     if (theme === "dark") {
       document.documentElement.classList.add("dark");

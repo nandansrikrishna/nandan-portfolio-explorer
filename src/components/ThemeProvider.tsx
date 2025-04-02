@@ -17,11 +17,6 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark" || savedTheme === "light") {
       setTheme(savedTheme);
-    } else {
-      if (typeof window !== "undefined") {
-        // Default to light mode, use system preference as fallback
-        setTheme(window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-      }
     }
   }, []);
 

@@ -6,8 +6,12 @@ import InfiniteProjectsSection from "@/components/InfiniteProjectsSection";
 import AwardsGrid from "@/components/AwardsGrid"; 
 import Footer from "@/components/Footer";
 import ExperienceSection from "@/components/ExperienceSection";
+import { useVisitorTracking } from "@/hooks/useVisitorTracking";
 
 const Index = () => {
+  // Track visitor
+  useVisitorTracking();
+
   // Smooth scroll implementation for internal links
   useEffect(() => {
     const handleLinkClick = (e: MouseEvent) => {

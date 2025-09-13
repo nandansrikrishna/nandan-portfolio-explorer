@@ -5,6 +5,12 @@ export const useVisitorTracking = () => {
   useEffect(() => {
     const trackVisitor = async () => {
       try {
+        // Check if we've already tracked this session
+        const sessionKey = 'visitor_tracked';
+        if (sessionStorage.getItem(sessionKey)) {
+          return; // Already tracked this session
+        }
+
         // Get visitor information
         const userAgent = navigator.userAgent;
         const referrer = document.referrer || null;
@@ -21,6 +27,9 @@ export const useVisitorTracking = () => {
 
         if (error) {
           console.error('Error tracking visitor:', error);
+        } else {
+          // Mark this session as tracked
+          sessionStorage.setItem(sessionKey, 'true');
         }
       } catch (error) {
         console.error('Error in visitor tracking:', error);

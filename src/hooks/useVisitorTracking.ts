@@ -10,14 +10,14 @@ export const useVisitorTracking = () => {
         const referrer = document.referrer || null;
         const pagePath = window.location.pathname;
 
-        // Insert visitor log
-        const { error } = await supabase
-          .from('visitor_logs')
-          .insert({
-            user_agent: userAgent,
-            referrer: referrer,
-            page_path: pagePath,
-          });
+        // Call edge function to track visitor with IP address
+        const { error } = await supabase.functions.invoke('track-visitor', {
+          body: {
+            userAgent,
+            referrer,
+            pagePath,
+          }
+        });
 
         if (error) {
           console.error('Error tracking visitor:', error);

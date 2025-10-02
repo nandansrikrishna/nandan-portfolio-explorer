@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Menu, X, Moon, Sun } from "lucide-react";
 import { useTheme } from "./ThemeProvider";
@@ -31,13 +32,13 @@ const Navbar = () => {
       )}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a 
-          href="#top" 
+        <Link 
+          to="/" 
           className="text-xl font-display font-bold"
           aria-label="Nandan's Portfolio"
         >
           Nandan
-        </a>
+        </Link>
         
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-8">

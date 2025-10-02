@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -7,6 +8,10 @@ import Footer from "@/components/Footer";
 import { notes } from "@/data/notes";
 
 export default function NotesPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />

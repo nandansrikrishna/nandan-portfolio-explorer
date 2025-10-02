@@ -21,7 +21,7 @@ export default function NotesPage() {
             <div className="text-6xl">💭</div>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-8">
             {notes.map((note) => (
               <Link key={note.id} to={`/notes/${note.id}`}>
                   <Card className="hover:shadow-lg transition-shadow cursor-pointer">
